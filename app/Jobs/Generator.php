@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use Log;
+use Exception;
 use App\Jobs\Job;
 use mikehaertl\wkhtmlto\Pdf;
 use mikehaertl\pdftk\Pdf as Pdftk;
@@ -16,8 +17,6 @@ class Generator extends Job implements SelfHandling
 
     /**
      * Create a new job instance.
-     *
-     * @return void
      */
     public function __construct(Array $document)
     {
@@ -86,7 +85,7 @@ class Generator extends Job implements SelfHandling
         ];
 
         $httpClient = new HttpClient;
-        $response = $httpClient->post(env('CLUSTER_MANAGER').'/receive-pdf', $data);
+        $httpClient->post(env('CLUSTER_MANAGER').'/receive-pdf', $data);
 
         // @todo, use proper Laravel helpers for removing finished-with files
         unlink($dataPDF);

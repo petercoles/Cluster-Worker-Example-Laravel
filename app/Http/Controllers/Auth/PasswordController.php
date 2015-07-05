@@ -22,8 +22,6 @@ class PasswordController extends Controller
 
     /**
      * Create a new password controller instance.
-     *
-     * @return self
      */
     public function __construct()
     {
